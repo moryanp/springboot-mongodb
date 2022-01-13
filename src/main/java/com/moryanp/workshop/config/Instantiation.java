@@ -6,6 +6,7 @@ import java.util.TimeZone;
 
 import com.moryanp.workshop.domain.Post;
 import com.moryanp.workshop.domain.User;
+import com.moryanp.workshop.dto.AuthorDTO;
 import com.moryanp.workshop.repository.PostRepository;
 import com.moryanp.workshop.repository.UserRepository;
 
@@ -34,10 +35,12 @@ public class Instantiation implements CommandLineRunner {
         User u2 = new User(null, "Alisson Flecha", "harley@email.com");
         User u3 = new User(null, "Natan Paredes", "tantan@email.com");
 
-        Post p1 = new Post(null, sdf.parse("21/03/2018"), "Partiu viagem!", "Vou viajar para São Paulo. Abraços!", u1);
-        Post p2 = new Post(null, sdf.parse("23/03/2018"), "Bom dia", "Acordei feliz hoje!", u1);
-
         userRepository.saveAll(Arrays.asList(u1, u2, u3));
+
+        Post p1 = new Post(null, sdf.parse("21/03/2018"), "Partiu viagem!", "Vou viajar para São Paulo. Abraços!",
+                new AuthorDTO(u1));
+        Post p2 = new Post(null, sdf.parse("23/03/2018"), "Bom dia", "Acordei feliz hoje!", new AuthorDTO(u1));
+
         postRepository.saveAll(Arrays.asList(p1, p2));
     }
 }
